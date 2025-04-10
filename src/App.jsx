@@ -24,7 +24,7 @@ function App() {
   let todosNotDone = todos.filter((todo) => !todo.completed);
 
   return (
-    <main className="min-h-screen max-w-md mx-auto flex flex-col gap-5">
+    <main className="min-h-screen max-w-md mx-auto px-5 sm:px-0 flex flex-col gap-5">
       <h1 className="text-3xl font-bold mt-5">Mi lista de tareas</h1>
       <section className="text-right">
         <ToDoInput todos={todos} setTodos={setTodos}></ToDoInput>
