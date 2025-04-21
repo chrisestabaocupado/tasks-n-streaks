@@ -3,7 +3,7 @@ import { useEffect, useReducer, useState } from "react";
 // components
 import { ToDoCard } from "./components/ToDoCard/ToDoCard";
 import { ToDoInput } from "./components/ToDoInput/ToDoInput";
-import { ThemeToggler } from "./components/themeToggler";
+import { ThemeToggler } from "./components/ThemeToggler";
 import { GraySpanText } from "./components/GraySpanText";
 //logic
 import { insertTodo, updateTodo, removeTodo } from "./utils/todosLocalStorage";
