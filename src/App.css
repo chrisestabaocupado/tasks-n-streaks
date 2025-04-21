@@ -1,5 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --black: #000000ff;
+    --night: #111111ff;
+    --eerie-black: #232323ff;
+    --jet: #343434ff;
+    --outer-space: #464646ff;
+    --davys-gray: #575757ff;
+    --dim-gray: #696969ff;
+    --gray: #7a7a7aff;
+  
+    --color-dark-primary: var(--night);
+    --color-dark-secondary: var(--eerie-black);
+    --color-dark-text-primary: var(--gray);
+    --color-dark-text-secondary: var(--davys-gray);
+    --color-dark-accent: var(--jet);
+    --color-dark-border: var(--dim-gray);
+  
+    --color-primary-light: #f9fafb;    /* grayScale-50 */
+    --color-secondary-light: #9ca3af;  /* grayScale-400 */
+    --color-accent-light: #d1d5db;     /* grayScale-300 */
+}
 
 * {
     font-family: "Nunito", sans-serif;

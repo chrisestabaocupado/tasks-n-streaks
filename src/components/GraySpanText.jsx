@@ -1,6 +1,6 @@
 const GraySpanText = ({ text }) => {
   return (
-    <span className="text-right text-gray-400 hover:cursor-default hover:text-black transition-colors duration-300 ease-in-out">
+    <span className="text-right dark:text-dark-text-primary">
       {text}
     </span>
   );

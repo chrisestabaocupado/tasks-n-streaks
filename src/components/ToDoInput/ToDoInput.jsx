@@ -12,10 +12,10 @@ const ToDoInput = ({todosDispatch}) => {
     };
 
     return (
-        <div className="flex flex-row w-full border border-gray-300 rounded-lg ">
+        <div className="flex flex-row w-full h-12 rounded-lg ">
             <input 
                 type="text"
-                className="w-full px-4 focus:outline-none focus:ring-1 focus:ring-gray-400 rounded-tl-lg rounded-bl-lg"
+                className="w-full h-full px-4 focus:outline-none border rounded-tl-lg rounded-bl-lg dark:focus:border-dark-border dark:border-dark-accent dark:placeholder:text-dark-text-primary dark:text-dark-text-primary transition-al ease-in-out duration-500"
                 id="todoInput"
                 onKeyDown={(e) => { e.key === "Enter" && handleInsert(); }}
                 onChange={e => setTodo(e.target.value)}
@@ -26,7 +26,7 @@ const ToDoInput = ({todosDispatch}) => {
                 onClick={() => { 
                     handleInsert();
                 }}
-                className="bg-black text-white rounded-tr-lg rounded-br-lg p-3 hover:cursor-pointer hover:bg-gray-800 transition-colors duration-300 ease-in-out">
+                className="w-min h-full px-3 rounded-tr-lg rounded-br-lg border hover:cursor-pointer dark:border-dark-accent dark:hover:border-dark-border dark:text-dark-text-secondary dark:hover:text-dark-text-primary transition-all ease-in-out duration-500">
                 <FontAwesomeIcon className="text-xl" icon={faPlus} />
             </button>
         </div>

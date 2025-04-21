@@ -6,14 +6,14 @@ import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 const ToDoCard = ({ title, id, completed, todosDispatch }) => {
 
   return (
-    <div className="flex flex-row border justify-between border-gray-300 rounded-lg max-w-md p-4 gap-4 hover:shadow-sm transition-shadow duration-300 ease-in-out">
+    <div className="flex flex-row border justify-between dark:border-dark-accent dark:hover:border-dark-border rounded-lg max-w-md p-4 gap-4 hover:shadow-sm transition-all duration-300 ease-in-out">
       <div className="flex flex-col justify-center">
         <button
           onClick={(e) => todosDispatch({
             type:'update', key: e.currentTarget.dataset.key, update :{ completed: !completed }
           })}
           data-key={id}
-          className="text-gray-400 hover:cursor-pointer hover:text-black transition-colors duration-300 ease-in-out"
+          className="dark:text-dark-text-secondary dark:hover:text-dark-text-primary hover:cursor-pointer transition-colors duration-300 ease-in-out"
         >
           <FontAwesomeIcon
             className={
@@ -26,11 +26,11 @@ const ToDoCard = ({ title, id, completed, todosDispatch }) => {
         </button>
       </div>
 
-      <div className="w-full wrap-anywhere">
+      <div className="w-full wrap-anywhere dark:text-dark-text-primary">
         <h2
           className={
             completed
-              ? "text-lg line-through text-gray-400"
+              ? "text-lg line-through"
               : "text-lg"
           }
         >
@@ -44,7 +44,7 @@ const ToDoCard = ({ title, id, completed, todosDispatch }) => {
             type: 'remove', key: e.currentTarget.dataset.key
           })}
           data-key={id}
-          className="text-gray-400 hover:cursor-pointer hover:text-red-400 transition-colors duration-300 ease-in-out"
+          className="dark:text-dark-text-secondary dark:hover:text-red-400 hover:cursor-pointer transition-colors duration-300 ease-in-out"
         >
           <FontAwesomeIcon className="text-xl" icon={faTrashCan} />
         </button>

@@ -1,4 +1,3 @@
-import { playSound } from "./buttonsInteraction";
 import uniqid from "uniqid";
 
 const insertTodo = (todo, state) => {
@@ -15,7 +14,6 @@ const updateTodo = (key, update, state) => {
   let updateTodos = state.list.map((todo) =>
     todo.id === key ? Object.assign(todo, update) : todo
   );
-  if (update.completed) playSound("/sounds/positive_done.mp3");
   return {
     list: updateTodos,
   };
