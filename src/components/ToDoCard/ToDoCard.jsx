@@ -2,15 +2,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { updateTodo, removeTodo } from "../../utils/todosLocalStorage";
 
-const ToDoCard = ({ title, id, completed, todos, setTodos }) => {
+const ToDoCard = ({ title, id, completed, todosDispatch }) => {
 
   return (
     <div className="flex flex-row border justify-between border-gray-300 rounded-lg max-w-md p-4 gap-4 hover:shadow-sm transition-shadow duration-300 ease-in-out">
       <div className="flex flex-col justify-center">
         <button
-          onClick={(e) => updateTodo(e, { completed: !completed }, todos, setTodos)}
+          onClick={(e) => todosDispatch({
+            type:'update', key: e.currentTarget.dataset.key, update :{ completed: !completed }
+          })}
           data-key={id}
           className="text-gray-400 hover:cursor-pointer hover:text-black transition-colors duration-300 ease-in-out"
         >
@@ -39,7 +40,9 @@ const ToDoCard = ({ title, id, completed, todos, setTodos }) => {
 
       <div className="flex flex-col justify-center">
         <button
-          onClick={(e) => removeTodo(e, todos, setTodos)}
+          onClick={(e) => todosDispatch({
+            type: 'remove', key: e.currentTarget.dataset.key
+          })}
           data-key={id}
           className="text-gray-400 hover:cursor-pointer hover:text-red-400 transition-colors duration-300 ease-in-out"
         >
