@@ -40,15 +40,15 @@ function App() {
     localStorage.setItem('todos', JSON.stringify(todos.list));
   }, [todos.list]);
 
-/*   let todosDone = todos.list.filter((todo) => todo.completed);
-  let todosNotDone = todos.list.filter((todo) => !todo.completed); */
+  let todosDone = todos.list.filter((todo) => todo.completed).length;
+  let todosNotDone = todos.list.filter((todo) => !todo.completed).length;
 
   return (
     <main className="min-h-screen max-w-md mx-auto px-5 sm:px-0 flex flex-col gap-5">
       <h1 className="text-3xl font-bold mt-5">Mi lista de tareas</h1>
       <section className="text-right">
         <ToDoInput todosDispatch={todosDispatch}></ToDoInput>
-        <GraySpanText text={"Total de Tareas: " + [].length}></GraySpanText>
+        <GraySpanText text={"Total de Tareas: " + todos.list.length}></GraySpanText>
       </section>
       <section className="flex flex-col gap-5">
         {todos.list.map((todo) => (
@@ -63,11 +63,11 @@ function App() {
       </section>
       <section className="flex flex-row justify-around items-center">
         <GraySpanText
-          text={"Tareas Completadas: " + [].length}
+          text={"Tareas Completadas: " + todosDone}
         ></GraySpanText>
 
         <GraySpanText
-          text={"Tareas Pendientes: " + [].length}
+          text={"Tareas Pendientes: " + todosNotDone}
         ></GraySpanText>
       </section>
 
