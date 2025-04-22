@@ -41,15 +41,14 @@
   --color-dark-border: var(--dim-gray);
 }
 
-* {
-  font-family: "Nunito", sans-serif;
-  font-optical-sizing: auto;
+*,h1 {
   font-weight: 400;
   font-style: normal;
 }
-
+* {
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+}
 h1 {
   font-family: "Poetsen One", sans-serif;
-  font-weight: 400;
-  font-style: normal;
 }
