@@ -1,32 +1,55 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poetsen+One&display=swap');
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
-@theme {
-    --black: #000000ff;
-    --night: #111111ff;
-    --eerie-black: #232323ff;
-    --jet: #343434ff;
-    --outer-space: #464646ff;
-    --davys-gray: #575757ff;
-    --dim-gray: #696969ff;
-    --gray: #7a7a7aff;
-  
-    --color-dark-primary: var(--night);
-    --color-dark-secondary: var(--eerie-black);
-    --color-dark-text-primary: var(--gray);
-    --color-dark-text-secondary: var(--davys-gray);
-    --color-dark-accent: var(--jet);
-    --color-dark-border: var(--dim-gray);
-  
-    --color-primary-light: #f9fafb;    /* grayScale-50 */
-    --color-secondary-light: #9ca3af;  /* grayScale-400 */
-    --color-accent-light: #d1d5db;     /* grayScale-300 */
+@theme light {
+  --ivory: #F9F9F6;
+  --pearl: #EFEFE9;
+  --cloud-gray: #D9D9D2;
+  --warm-stone: #B6B6AD;
+  --clay: #9E9E94;
+  --sand-tint: #CFCFC3;
+  --accent-tan: #BFAA96;
+  --border-stone: #D5D5CD;
+
+  --text-charcoal: #4A4A45;
+  --text-earth: #5E5E56;
+
+  --color-light-primary: var(--ivory);
+  --color-light-secondary: var(--sand-tint);
+  --color-light-text-primary: var(--text-charcoal);
+  --color-light-text-secondary: var(--text-earth);
+  --color-light-accent: var(--accent-tan);
+  --color-light-border: var(--border-stone);
+}
+
+@theme dark {
+  --black: #000000ff;
+  --night: #111111ff;
+  --eerie-black: #232323ff;
+  --jet: #343434ff;
+  --outer-space: #464646ff;
+  --davys-gray: #575757ff;
+  --dim-gray: #696969ff;
+  --gray: #7a7a7aff;
+
+  --color-dark-primary: var(--night);
+  --color-dark-secondary: var(--eerie-black);
+  --color-dark-text-primary: var(--gray);
+  --color-dark-text-secondary: var(--davys-gray);
+  --color-dark-accent: var(--jet);
+  --color-dark-border: var(--dim-gray);
 }
 
 * {
-    font-family: "Nunito", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1 {
+  font-family: "Poetsen One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }

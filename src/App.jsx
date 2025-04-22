@@ -5,11 +5,12 @@ import { ToDoCard } from "./components/ToDoCard/ToDoCard";
 import { ToDoInput } from "./components/ToDoInput/ToDoInput";
 import { ThemeToggler } from "./components/ThemeToggler";
 import { GraySpanText } from "./components/GraySpanText";
+import { RectangleButton } from "./components/RectangleButton";
 //logic
 import { insertTodo, updateTodo, removeTodo } from "./utils/todosLocalStorage";
 // styles
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faFilter, faSort } from "@fortawesome/free-solid-svg-icons";
 import "./App.css";
 // my app <3
 function App() {
@@ -44,11 +45,11 @@ function App() {
   let todosNotDone = todos.list.filter((todo) => !todo.completed).length;
 
   return (
-    <div className="bg-primary-light dark:bg-dark-primary w-full">
+    <div className="bg-light-primary dark:bg-dark-primary w-full">
       <main className="min-h-screen max-w-md mx-auto px-5 sm:px-0 flex flex-col gap-5">
-        <section className="sticky top-0 flex flex-col w-full mt-5 gap-5 dark:bg-dark-primary">
+        <section className="flex flex-col w-full pt-5 gap-5 bg-light-primary dark:bg-dark-primary">
           <div className="flex flex-row w-full items-end justify-between">
-            <h1 className="text-3xl font-bold dark:text-dark-text-primary">
+            <h1 className="text-3xl font-bold text-light-text-primary dark:text-dark-text-primary">
               Mi lista de tareas
             </h1>
             <ThemeToggler
@@ -56,14 +57,21 @@ function App() {
               changeTheme={changeTheme}
             ></ThemeToggler>
           </div>
-          <div className="flex flex-col text-right gap-2">
+          <div className="flex flex-col gap-4">
             <ToDoInput todosDispatch={todosDispatch}></ToDoInput>
-            <GraySpanText
-              text={"Total de Tareas: " + todos.list.length}
-            ></GraySpanText>
+            <div className="flex flex-row items-center gap-4">
+              <RectangleButton icon={faFilter} text="Filtrar"></RectangleButton>
+              <RectangleButton icon={faSort} text="Ordenar"></RectangleButton>
+
+              <span className="ml-auto">
+                <GraySpanText
+                  text={"Total de Tareas: " + todos.list.length}
+                ></GraySpanText>
+              </span>
+            </div>
           </div>
         </section>
-        <section className="flex flex-col gap-5">
+        <section className="flex flex-col gap-5 todos">
           {todos.list.map((todo) => (
             <ToDoCard
               todosDispatch={todosDispatch}
@@ -84,10 +92,10 @@ function App() {
           ></GraySpanText>
         </section>
 
-        <footer className="dark:bg-dark-primary sticky bottom-0 tex-lg dark:text-dark-text-secondary py-4 flex flex-row gap-2 mt-auto justify-center items-center">
+        <footer className="bg-light-primary dark:bg-dark-primary sticky bottom-0 tex-lg text-light-text-secondary dark:text-dark-text-secondary py-4 flex flex-row gap-2 mt-auto justify-center items-center">
           <span>Made with</span>
           <FontAwesomeIcon
-            className="dark:text-dark-text-primary"
+            className="text-light-text-primary dark:text-dark-text-primary"
             icon={faHeart}
           />
           <span>by Christopher Glood</span>

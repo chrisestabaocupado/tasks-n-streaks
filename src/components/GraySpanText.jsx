@@ -1,6 +1,6 @@
 const GraySpanText = ({ text }) => {
   return (
-    <span className="text-right dark:text-dark-text-primary">
+    <span className="text-right text-light-text-primary dark:text-dark-text-primary">
       {text}
     </span>
   );

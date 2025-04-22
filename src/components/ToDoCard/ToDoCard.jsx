@@ -6,14 +6,14 @@ import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 const ToDoCard = ({ title, id, completed, todosDispatch }) => {
 
   return (
-    <div className="flex flex-row border justify-between dark:border-dark-accent dark:hover:border-dark-border rounded-lg max-w-md p-4 gap-4 hover:shadow-sm transition-all duration-300 ease-in-out">
+    <div className="flex flex-row border justify-between border-light-accent hover:border-light-border dark:border-dark-accent dark:hover:border-dark-border rounded-lg max-w-md p-4 gap-4 hover:shadow-sm transition-all duration-300 ease-in-out">
       <div className="flex flex-col justify-center">
         <button
           onClick={(e) => todosDispatch({
             type:'update', key: e.currentTarget.dataset.key, update :{ completed: !completed }
           })}
           data-key={id}
-          className="dark:text-dark-text-secondary dark:hover:text-dark-text-primary hover:cursor-pointer transition-colors duration-300 ease-in-out"
+          className="text-light-text-secondary hover:text-light-text-primary dark:text-dark-text-secondary dark:hover:text-dark-text-primary hover:cursor-pointer transition-colors duration-300 ease-in-out"
         >
           <FontAwesomeIcon
             className={
@@ -26,7 +26,7 @@ const ToDoCard = ({ title, id, completed, todosDispatch }) => {
         </button>
       </div>
 
-      <div className="w-full wrap-anywhere dark:text-dark-text-primary">
+      <div className="w-full wrap-anywhere text-light-text-primary dark:text-dark-text-primary">
         <h2
           className={
             completed
@@ -44,7 +44,7 @@ const ToDoCard = ({ title, id, completed, todosDispatch }) => {
             type: 'remove', key: e.currentTarget.dataset.key
           })}
           data-key={id}
-          className="dark:text-dark-text-secondary dark:hover:text-red-400 hover:cursor-pointer transition-colors duration-300 ease-in-out"
+          className="text-light-text-secondary dark:text-dark-text-secondary hover:text-red-400 hover:cursor-pointer transition-colors duration-300 ease-in-out"
         >
           <FontAwesomeIcon className="text-xl" icon={faTrashCan} />
         </button>
