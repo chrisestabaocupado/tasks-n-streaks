@@ -29,7 +29,7 @@ npm install
 npm start
 ```
 
-The project should be available at http://localhost:3000 or the configured port.
+The project should be available at http://localhost:5173 or the configured port.
 
 ## Usage
 
