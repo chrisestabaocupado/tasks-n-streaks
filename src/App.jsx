@@ -125,7 +125,10 @@ function App() {
                 <RectangleButton
                   icon={faSort}
                   text="Ordenar"
-                  onClick={() => setShowSortOptions((prev) => !prev)}
+                  onClick={() => {
+                    setShowFilterOptions(false);
+                    setShowSortOptions((prev) => !prev);
+                  }}
                 ></RectangleButton>
                 {showSortOptions && (
                   <DropdownSort
@@ -140,7 +143,10 @@ function App() {
                 <RectangleButton
                   icon={faFilter}
                   text="Filtrar"
-                  onClick={() => setShowFilterOptions((prev) => !prev)}
+                  onClick={() => {
+                    setShowSortOptions(false);
+                    setShowFilterOptions((prev) => !prev);
+                  }}
                 ></RectangleButton>
                 {showFilterOptions && (
                   <DropdownFilter
