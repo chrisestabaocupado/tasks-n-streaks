@@ -22,6 +22,7 @@ import {
   faCircleXmark,
   faArrowDown,
   faArrowUp,
+  faQuestion,
 } from "@fortawesome/free-solid-svg-icons";
 import "./App.css";
 // my app <3
@@ -119,7 +120,7 @@ function App() {
               </span>
             </div>
             {/* Sorts y Filtros */}
-            {sortCriterion !== "none" && (
+            {sortCriterion.criterion !== "none" && (
               <div className="flex flex-row gap-5">
                 <div className="border border-dashed text-light-accent hover:text-light-border border-light-accent hover:border-light-border dark:text-dark-text-secondary dark:hover:text-dark-text-primary dark:border-dark-accent dark:hover:border-dark-border rounded-lg px-2 py-1 text-sm flex flex-row gap-2 items-center">
                   <span
@@ -131,13 +132,17 @@ function App() {
                   <span>
                     {sortCriterion.criterion === "title"
                       ? "Por titulo"
-                      : "Por estado"}
+                      : sortCriterion.criterion === "completed"
+                      ? "Por estado"
+                      : setSortCriterion({ criterion: "none", order: "asc" })}
                   </span>
                   <span className="text-[10px]">
                     {sortCriterion.order === "asc" ? (
                       <FontAwesomeIcon icon={faArrowUp}></FontAwesomeIcon>
-                    ) : (
+                    ) : sortCriterion.order === "desc" ? (
                       <FontAwesomeIcon icon={faArrowDown}></FontAwesomeIcon>
+                    ) : (
+                      <FontAwesomeIcon icon={faQuestion}></FontAwesomeIcon>
                     )}
                   </span>
                 </div>
