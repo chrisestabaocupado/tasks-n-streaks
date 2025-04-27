@@ -1,5 +1,12 @@
 import uniqid from "uniqid";
 
+const initTodos = () => {
+  const stored = localStorage.getItem("todos");
+  return {
+    list: stored ? JSON.parse(stored) : [],
+  };
+};
+
 const insertTodo = (todo, state) => {
   if (todo.trim() !== "") {
     let obj = { id: uniqid.time(), title: todo, completed: false };
@@ -26,4 +33,4 @@ const removeTodo = (key, state) => {
   };
 };
 
-export { insertTodo, updateTodo, removeTodo };
+export { initTodos, insertTodo, updateTodo, removeTodo };
