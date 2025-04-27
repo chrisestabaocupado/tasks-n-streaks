@@ -15,6 +15,7 @@ import {
   updateTodo,
   removeTodo,
 } from "./utils/todosLocalStorage";
+import { sortTodosByCriterion, initSortCriterion } from "./utils/sortingUtils";
 // styles
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -40,34 +41,46 @@ function App() {
     }
   };
 
-  const initSortCriterion = () => {
-    const storedSortCriterion = localStorage.getItem("sortCriterion");
-    if (storedSortCriterion) {
-      return JSON.parse(storedSortCriterion);
-    } else {
-      return { criterion: "none", order: "asc" };
-    }
-  };
-
+  // todos
   const [todos, todosDispatch] = useReducer(todosReducer, undefined, initTodos);
+  let todosDone = todos.list.filter((todo) => todo.completed).length;
+  let todosNotDone = todos.list.filter((todo) => !todo.completed).length;
+  // theme
   const [theme, changeTheme] = useState("light");
+  // sorting
   const [sortCriterion, setSortCriterion] = useState(initSortCriterion);
   const [showSortOptions, setShowSortOptions] = useState(false);
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
+    const storedSortCriterion = localStorage.getItem("sortCriterion");
     if (storedTheme) {
       changeTheme(storedTheme);
       storedTheme === "dark"
         ? document.querySelector("body").classList.toggle("dark")
         : document.querySelector("body").classList.remove("dark");
+    } else if (storedSortCriterion) {
+      setSortCriterion(JSON.parse(storedSortCriterion));
     } else {
+      // establecer tema por defecto
       localStorage.setItem("theme", "light");
+      // establecer creterio de ordenamiento por defecto
+      localStorage.setItem(
+        "sortCriterion",
+        JSON.stringify({ criterion: "none", order: "asc" })
+      );
     }
   }, []);
 
   useEffect(() => {
-    console.log("sort", sortCriterion);
+    if (theme === "dark") {
+      document.body.classList.toggle("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [theme]);
+
+  useEffect(() => {
     if (sortCriterion.criterion !== "none") {
       localStorage.setItem("sortCriterion", JSON.stringify(sortCriterion));
     } else {
@@ -78,9 +91,6 @@ function App() {
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos.list));
   }, [todos.list]);
-
-  let todosDone = todos.list.filter((todo) => todo.completed).length;
-  let todosNotDone = todos.list.filter((todo) => !todo.completed).length;
 
   return (
     <div className="bg-light-primary dark:bg-dark-primary w-full">
@@ -98,7 +108,7 @@ function App() {
           <div className="flex flex-col gap-4">
             <ToDoInput todosDispatch={todosDispatch}></ToDoInput>
             <div className="flex flex-row items-center gap-4">
-              <div className="relative z-100 flex flex-col gap-20 items-start">
+              <div className="relative z-50 flex flex-col gap-20 items-start">
                 <RectangleButton
                   icon={faSort}
                   text="Ordenar"
@@ -125,7 +135,9 @@ function App() {
                 <div className="border border-dashed text-light-accent hover:text-light-border border-light-accent hover:border-light-border dark:text-dark-text-secondary dark:hover:text-dark-text-primary dark:border-dark-accent dark:hover:border-dark-border rounded-lg px-2 py-1 text-sm flex flex-row gap-2 items-center">
                   <span
                     className="cursor-pointer"
-                    onClick={() => setSortCriterion("none")}
+                    onClick={() =>
+                      setSortCriterion({ criterion: "none", order: "asc" })
+                    }
                   >
                     <FontAwesomeIcon icon={faCircleXmark}></FontAwesomeIcon>
                   </span>
@@ -151,7 +163,7 @@ function App() {
           </div>
         </section>
         <section className="flex flex-col gap-5 todos">
-          {todos.list.map((todo) => (
+          {sortTodosByCriterion(todos, sortCriterion).map((todo) => (
             <ToDoCard
               todosDispatch={todosDispatch}
               key={todo.id}
