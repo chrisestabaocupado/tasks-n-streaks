@@ -3,9 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const ThemeToggler = ({ theme, changeTheme }) => {
   const themeHandler = () => {
-    changeTheme((prev) => (prev === "light" ? "dark" : "light"));
-    localStorage.setItem("theme", theme === "light" ? "dark" : "light");
-    document.querySelector("body").classList.toggle("dark")
+    changeTheme((prev) => {
+      const newTheme =
+        prev === "light" ? "dark" : prev === "dark" ? "light" : "light";
+      localStorage.setItem("theme", newTheme);
+      return newTheme;
+    });
   };
   return (
     <button
