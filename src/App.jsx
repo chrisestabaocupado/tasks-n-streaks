@@ -7,6 +7,9 @@ import { ThemeToggler } from "./components/ThemeToggler";
 import { GraySpanText } from "./components/GraySpanText";
 import { RectangleButton } from "./components/RectangleButton";
 import { DropdownSort } from "./components/Dropdown/DropdownSort";
+import { DropdownFilter } from "./components/Dropdown/DropdownFilter";
+import { Sorts } from "./components/FiltersAndSorts/Sorts";
+import { Filters } from "./components/FiltersAndSorts/Filters";
 import { Footer } from "./components/Footer";
 //logic
 import {
@@ -16,15 +19,9 @@ import {
   removeTodo,
 } from "./utils/todosLocalStorage";
 import { sortTodosByCriterion, initSortCriterion } from "./utils/sortingUtils";
+import { initFilterCriterion, filterBy } from "./utils/filterUtils";
 // styles
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faSort,
-  faCircleXmark,
-  faArrowDown,
-  faArrowUp,
-  faQuestion,
-} from "@fortawesome/free-solid-svg-icons";
+import { faSort, faFilter } from "@fortawesome/free-solid-svg-icons";
 import "./App.css";
 // my app <3
 function App() {
@@ -46,11 +43,18 @@ function App() {
   // sorting
   const [sortCriterion, setSortCriterion] = useState(initSortCriterion);
   const [showSortOptions, setShowSortOptions] = useState(false);
+  // filter
+  const [showFilterOptions, setShowFilterOptions] = useState(false);
+  const [filterCriterion, setFilterCriterion] = useState(initFilterCriterion);
   // todos
   const [todos, todosDispatch] = useReducer(todosReducer, undefined, initTodos);
   let todosDone = todos.list.filter((todo) => todo.completed).length;
   let todosNotDone = todos.list.filter((todo) => !todo.completed).length;
-  let renderedTodos = sortTodosByCriterion(todos, sortCriterion);
+
+  let renderedTodos = sortTodosByCriterion(
+    filterBy(todos.list, filterCriterion.criterion),
+    sortCriterion
+  );
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
@@ -80,6 +84,14 @@ function App() {
       document.body.classList.remove("dark");
     }
   }, [theme]);
+
+  useEffect(() => {
+    if (filterCriterion.criterion !== "none") {
+      localStorage.setItem("filterCriterion", JSON.stringify(filterCriterion));
+    } else {
+      localStorage.removeItem("filterCriterion");
+    }
+  }, [filterCriterion]);
 
   useEffect(() => {
     if (sortCriterion.criterion !== "none") {
@@ -124,6 +136,20 @@ function App() {
                 )}
               </div>
 
+              <div className="relative z-50 flex flex-col gap-20 items-start">
+                <RectangleButton
+                  icon={faFilter}
+                  text="Filtrar"
+                  onClick={() => setShowFilterOptions((prev) => !prev)}
+                ></RectangleButton>
+                {showFilterOptions && (
+                  <DropdownFilter
+                    setShowFilterOptions={setShowFilterOptions}
+                    setFilterCriterion={setFilterCriterion}
+                  ></DropdownFilter>
+                )}
+              </div>
+
               <span className="ml-auto">
                 <GraySpanText
                   text={"Total de Tareas: " + todos.list.length}
@@ -131,36 +157,20 @@ function App() {
               </span>
             </div>
             {/* Sorts y Filtros */}
-            {sortCriterion.criterion !== "none" && (
-              <div className="flex flex-row gap-5">
-                <div className="border border-dashed text-light-accent hover:text-light-border border-light-accent hover:border-light-border dark:text-dark-text-secondary dark:hover:text-dark-text-primary dark:border-dark-accent dark:hover:border-dark-border rounded-lg px-2 py-1 text-sm flex flex-row gap-2 items-center">
-                  <span
-                    className="cursor-pointer"
-                    onClick={() =>
-                      setSortCriterion({ criterion: "none", order: "asc" })
-                    }
-                  >
-                    <FontAwesomeIcon icon={faCircleXmark}></FontAwesomeIcon>
-                  </span>
-                  <span>
-                    {sortCriterion.criterion === "title"
-                      ? "Por titulo"
-                      : sortCriterion.criterion === "completed"
-                      ? "Por estado"
-                      : setSortCriterion({ criterion: "none", order: "asc" })}
-                  </span>
-                  <span className="text-[10px]">
-                    {sortCriterion.order === "asc" ? (
-                      <FontAwesomeIcon icon={faArrowUp}></FontAwesomeIcon>
-                    ) : sortCriterion.order === "desc" ? (
-                      <FontAwesomeIcon icon={faArrowDown}></FontAwesomeIcon>
-                    ) : (
-                      <FontAwesomeIcon icon={faQuestion}></FontAwesomeIcon>
-                    )}
-                  </span>
-                </div>
-              </div>
-            )}
+            <div className="flex flex-row gap-5">
+              {sortCriterion.criterion !== "none" && (
+                <Sorts
+                  sortCriterion={sortCriterion}
+                  setSortCriterion={setSortCriterion}
+                ></Sorts>
+              )}
+              {filterCriterion.criterion !== "none" && (
+                <Filters
+                  filterCriterion={filterCriterion}
+                  setFilterCriterion={setFilterCriterion}
+                ></Filters>
+              )}
+            </div>
           </div>
         </section>
         <section className="flex flex-col gap-5 todos">

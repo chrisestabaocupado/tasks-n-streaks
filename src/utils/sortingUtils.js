@@ -9,7 +9,7 @@ const initSortCriterion = () => {
 
 const sortTodosByCriterion = (todos, sortCriterion) => {
   if (sortCriterion.criterion !== "none") {
-    const sortedTodos = [...todos.list].sort((a, b) => {
+    const sortedTodos = [...todos].sort((a, b) => {
       if (sortCriterion.criterion === "title") {
         return sortCriterion.order === "asc"
           ? a.title.localeCompare(b.title)
@@ -20,14 +20,14 @@ const sortTodosByCriterion = (todos, sortCriterion) => {
           : b.completed - a.completed;
       }else{
         console.error("Invalid sort criterion:", sortCriterion.criterion);
-        return todos.list
+        return todos
       }
       
     });
     console.log(sortedTodos)
     return sortedTodos;
   } else {
-    return todos.list
+    return todos
   }
 };
 
