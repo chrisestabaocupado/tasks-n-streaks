@@ -3,9 +3,9 @@ import { useEffect, useReducer, useState } from "react";
 // components
 import { ToDoCard } from "./components/ToDoCard/ToDoCard";
 import { ToDoInput } from "./components/ToDoInput/ToDoInput";
-import { ThemeToggler } from "./components/ThemeToggler";
-import { GraySpanText } from "./components/GraySpanText";
-import { RectangleButton } from "./components/RectangleButton";
+import { ThemeToggler } from "./components/Buttons/ThemeToggler";
+import { GraySpanText } from "./components/Utils/GraySpanText";
+import { RectangleButton } from "./components/Buttons/RectangleButton";
 import { DropdownSort } from "./components/Dropdown/DropdownSort";
 import { DropdownFilter } from "./components/Dropdown/DropdownFilter";
 import { Sorts } from "./components/FiltersAndSorts/Sorts";
