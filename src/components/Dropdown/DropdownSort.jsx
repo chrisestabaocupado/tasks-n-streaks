@@ -7,10 +7,17 @@ import {
   faArrowDownShortWide, faArrowUpShortWide
 } from "@fortawesome/free-solid-svg-icons";
 
-const DropdownSort = ({ setShowSortOptions, sortCriterion, setSortCriterion }) => {
-const id = "dropdownSort"
+const DropdownSort = ({
+  setShowSortOptions,
+  sortCriterion,
+  setSortCriterion,
+}) => {
+  const id = "dropdownSort";
   return (
-    <DropdownListContainer id={id}>
+    <DropdownListContainer
+      onMouseLeave={() => setShowSortOptions(false)}
+      id={id}
+    >
       <DropdownItem
         title="por Titulo"
         icon={
@@ -32,12 +39,12 @@ const id = "dropdownSort"
       <DropdownItem
         title="por Estado"
         icon={
-            sortCriterion.criterion === "completed"
-              ? sortCriterion.order === "desc"
-                ? faArrowDownShortWide
-                : faArrowUpShortWide
+          sortCriterion.criterion === "completed"
+            ? sortCriterion.order === "desc"
+              ? faArrowDownShortWide
+              : faArrowUpShortWide
             : faArrowDownAZ
-          }
+        }
         onClick={() => {
           setSortCriterion((prev) =>
             prev.criterion === "completed" && prev.order === "desc"
