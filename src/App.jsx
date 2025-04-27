@@ -41,15 +41,16 @@ function App() {
     }
   };
 
-  // todos
-  const [todos, todosDispatch] = useReducer(todosReducer, undefined, initTodos);
-  let todosDone = todos.list.filter((todo) => todo.completed).length;
-  let todosNotDone = todos.list.filter((todo) => !todo.completed).length;
   // theme
   const [theme, changeTheme] = useState("light");
   // sorting
   const [sortCriterion, setSortCriterion] = useState(initSortCriterion);
   const [showSortOptions, setShowSortOptions] = useState(false);
+  // todos
+  const [todos, todosDispatch] = useReducer(todosReducer, undefined, initTodos);
+  let todosDone = todos.list.filter((todo) => todo.completed).length;
+  let todosNotDone = todos.list.filter((todo) => !todo.completed).length;
+  let renderedTodos = sortTodosByCriterion(todos, sortCriterion);
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
@@ -163,7 +164,7 @@ function App() {
           </div>
         </section>
         <section className="flex flex-col gap-5 todos">
-          {sortTodosByCriterion(todos, sortCriterion).map((todo) => (
+          {renderedTodos.map((todo) => (
             <ToDoCard
               todosDispatch={todosDispatch}
               key={todo.id}
