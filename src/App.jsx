@@ -106,10 +106,10 @@ function App() {
   }, [todos.list]);
 
   return (
-    <div className="bg-light-primary dark:bg-dark-primary w-full">
-      <main className="min-h-screen max-w-sm mx-auto px-5 sm:px-0 flex flex-col gap-5">
-        <section className="flex flex-col w-full pt-5 gap-5 bg-light-primary dark:bg-dark-primary">
-          <div className="flex flex-row w-full items-end justify-between">
+    <div className="w-full bg-light-primary dark:bg-dark-primary">
+      <main className="flex flex-col max-w-sm min-h-screen gap-5 px-5 mx-auto sm:px-0">
+        <section className="flex flex-col w-full gap-5 pt-5 bg-light-primary dark:bg-dark-primary">
+          <div className="flex flex-row items-end justify-between w-full">
             <h1 className="text-3xl font-bold text-light-text-primary dark:text-dark-text-primary">
               Mi lista de tareas
             </h1>
@@ -121,7 +121,7 @@ function App() {
           <div className="flex flex-col gap-4">
             <ToDoInput todosDispatch={todosDispatch}></ToDoInput>
             <div className="flex flex-row items-center gap-4">
-              <div className="relative z-50 flex flex-col gap-20 items-start">
+              <div className="relative z-50 flex flex-col items-start gap-20">
                 <RectangleButton
                   icon={faSort}
                   text="Ordenar"
@@ -139,7 +139,7 @@ function App() {
                 )}
               </div>
 
-              <div className="relative z-50 flex flex-col gap-20 items-start">
+              <div className="relative z-50 flex flex-col items-start gap-20">
                 <RectangleButton
                   icon={faFilter}
                   text="Filtrar"
@@ -190,7 +190,7 @@ function App() {
             />
           ))}
         </section>
-        <section className="flex flex-row justify-around items-center">
+        <section className="flex flex-row items-center justify-around">
           <GraySpanText
             text={"Tareas Completadas: " + todosDone}
           ></GraySpanText>
