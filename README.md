@@ -1,7 +1,4 @@
- <img src="./public/readmebanner.jpg" alt="Descripción de la imagen" style="display:block; margin-left:auto; margin-right:auto;">
-
-
-# MyToDoList - React Project
+# Tasks-N-Streaks
 
 Un proyecto simple de lista de tareas (ToDo List) realizado con React. Permite agregar, eliminar, marcar como completadas, y eliminar tareas. Ideal para gestionar actividades diarias.
 
@@ -11,12 +8,12 @@ Follow these steps to run the project on your local machine:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/chrisestabaocupado/todolist-react.git
+git clone https://github.com/chrisestabaocupado/tasks-n-streaks.git
 ```
 
 2. Navigate to the project directory:
 ```bash
-cd todolist-react
+cd tasks-n-streaks
 ```
 
 3. Install dependencies:
