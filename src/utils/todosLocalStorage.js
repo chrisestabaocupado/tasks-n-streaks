@@ -33,4 +33,17 @@ const removeTodo = (key, state) => {
   };
 };
 
-export { initTodos, insertTodo, updateTodo, removeTodo };
+const todosReducer = (state, action) => {
+  switch (action.type) {
+    case "insert":
+      return insertTodo(action.todo, state);
+    case "update":
+      return updateTodo(action.key, action.update, state);
+    case "remove":
+      return removeTodo(action.key, state);
+    default:
+      return state;
+  }
+};
+
+export { todosReducer, initTodos, insertTodo, updateTodo, removeTodo };

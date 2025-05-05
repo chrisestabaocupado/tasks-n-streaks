@@ -4,14 +4,15 @@ import {
   faArrowUpAZ,
   faArrowDownZA,
   faArrowDownAZ,
-  faArrowDownShortWide, faArrowUpShortWide
+  faArrowDownShortWide,
+  faArrowUpShortWide,
 } from "@fortawesome/free-solid-svg-icons";
+import { useContext } from "react";
+import { RenderingContext } from "../Utils/RenderingContext";
 
-const DropdownSort = ({
-  setShowSortOptions,
-  sortCriterion,
-  setSortCriterion,
-}) => {
+const DropdownSort = () => {
+  const { setShowSortOptions, sortCriterion, setSortCriterion } =
+    useContext(RenderingContext);
   const id = "dropdownSort";
   return (
     <DropdownListContainer
