@@ -4,13 +4,15 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useState, useContext } from "react";
 import { ToDoContext } from "../TodoList/ToDoContext";
 
-const ToDoInput = () => {
+const ToDoInput = ({ isStreakModeOn }) => {
   const { todosDispatch } = useContext(ToDoContext);
   const [todo, setTodo] = useState("");
 
   const handleInsert = () => {
-    todosDispatch({ type: "insert", todo: todo });
-    setTodo("");
+    if (!isStreakModeOn) {
+      todosDispatch({ type: "insert", todo: todo });
+      setTodo("");
+    }
   };
 
   return (
@@ -23,7 +25,11 @@ const ToDoInput = () => {
           e.key === "Enter" && handleInsert();
         }}
         onChange={(e) => setTodo(e.target.value)}
-        placeholder="Escribe una nueva tarea"
+        placeholder={
+          isStreakModeOn
+            ? "Ej: ¿Cerré la puerta del cuarto?"
+            : "Ej: Comprar leche condensada."
+        }
         value={todo}
       />
       <button

@@ -8,11 +8,11 @@ import {
   faArrowUpShortWide,
 } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
-import { RenderingContext } from "../Utils/RenderingContext";
+import { SortContext } from "../FiltersAndSorts/SortContext";
 
 const DropdownSort = () => {
   const { setShowSortOptions, sortCriterion, setSortCriterion } =
-    useContext(RenderingContext);
+    useContext(SortContext);
   const id = "dropdownSort";
   return (
     <DropdownListContainer

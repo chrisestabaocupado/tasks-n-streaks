@@ -1,4 +1,4 @@
-import uniqid from "uniqid";
+import { nanoid } from "nanoid";
 
 const initTodos = () => {
   const stored = localStorage.getItem("todos");
@@ -9,7 +9,7 @@ const initTodos = () => {
 
 const insertTodo = (todo, state) => {
   if (todo.trim() !== "") {
-    let obj = { id: uniqid.time(), title: todo, completed: false };
+    let obj = { id: nanoid(), title: todo, completed: false };
     return {
       list: [...state.list, obj],
     };

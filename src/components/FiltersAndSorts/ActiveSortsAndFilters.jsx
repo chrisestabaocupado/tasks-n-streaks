@@ -1,15 +1,13 @@
 import { useContext } from "react";
-import { RenderingContext } from "../Utils/RenderingContext";
+import { SortContext } from "../FiltersAndSorts/SortContext";
+import { FilterContext } from "../FiltersAndSorts/FilterContext";
 import { Filters } from "./Filters";
 import { Sorts } from "./Sorts";
 
 const ActiveSortsAndFilters = () => {
-  const {
-    sortCriterion,
-    filterCriterion,
-    setFilterCriterion,
-    setSortCriterion,
-  } = useContext(RenderingContext);
+  const { sortCriterion, setSortCriterion } = useContext(SortContext);
+  const { filterCriterion, setFilterCriterion } = useContext(FilterContext);
+
   return (
     (sortCriterion.criterion !== "none" ||
       filterCriterion.criterion !== "none") && (

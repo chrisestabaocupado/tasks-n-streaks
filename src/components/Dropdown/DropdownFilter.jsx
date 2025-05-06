@@ -3,11 +3,11 @@ import { DropdownItem } from "./DropdownItem";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
-import { RenderingContext } from "../Utils/RenderingContext";
+import { FilterContext } from "../FiltersAndSorts/FilterContext";
 
 const DropdownFilter = () => {
   const { setShowFilterOptions, setFilterCriterion } =
-    useContext(RenderingContext);
+    useContext(FilterContext);
   const id = "dropdownFilter";
   return (
     <DropdownListContainer

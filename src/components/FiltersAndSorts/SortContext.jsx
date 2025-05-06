@@ -1,17 +1,12 @@
-import { createContext, useState, useEffect } from "react";
-//
+import { createContext, useEffect, useState } from "react";
 import { initSortCriterion } from "../../utils/sortingUtils";
-import { initFilterCriterion } from "../../utils/filterUtils";
-// context
-const RenderingContext = createContext(null);
-// provider
-const RenderingProvider = ({ children }) => {
+
+const SortContext = createContext(null);
+
+const SortProvider = ({ children }) => {
   // sorting
   const [sortCriterion, setSortCriterion] = useState(initSortCriterion);
   const [showSortOptions, setShowSortOptions] = useState(false);
-  // filter
-  const [filterCriterion, setFilterCriterion] = useState(initFilterCriterion);
-  const [showFilterOptions, setShowFilterOptions] = useState(false);
   // effects
   useEffect(() => {
     const storedSortCriterion = localStorage.getItem("sortCriterion");
@@ -28,37 +23,25 @@ const RenderingProvider = ({ children }) => {
   }, [setSortCriterion]);
 
   useEffect(() => {
-    if (filterCriterion.criterion !== "none") {
-      localStorage.setItem("filterCriterion", JSON.stringify(filterCriterion));
-    } else {
-      localStorage.removeItem("filterCriterion");
-    }
-  }, [filterCriterion]);
-
-  useEffect(() => {
     if (sortCriterion.criterion !== "none") {
       localStorage.setItem("sortCriterion", JSON.stringify(sortCriterion));
     } else {
       localStorage.removeItem("sortCriterion");
     }
   }, [sortCriterion]);
-
+  
   return (
-    <RenderingContext.Provider
+    <SortContext.Provider
       value={{
-        sortCriterion,
-        setSortCriterion,
         showSortOptions,
         setShowSortOptions,
-        filterCriterion,
-        setFilterCriterion,
-        showFilterOptions,
-        setShowFilterOptions,
+        sortCriterion,
+        setSortCriterion,
       }}
     >
       {children}
-    </RenderingContext.Provider>
+    </SortContext.Provider>
   );
 };
 
-export { RenderingContext, RenderingProvider };
+export { SortContext, SortProvider };
