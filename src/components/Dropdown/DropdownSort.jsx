@@ -7,16 +7,32 @@ import {
   faArrowDownShortWide,
   faArrowUpShortWide,
 } from "@fortawesome/free-solid-svg-icons";
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { SortContext } from "../FiltersAndSorts/SortContext";
 
 const DropdownSort = () => {
   const { setShowSortOptions, sortCriterion, setSortCriterion } =
     useContext(SortContext);
+  // dropdownRef to close dropdown when clicking outside
   const id = "dropdownSort";
+  const dropdownRef = useRef(null);
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowSortOptions(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  });
+  // component
   return (
     <DropdownListContainer
       onMouseLeave={() => setShowSortOptions(false)}
+      ref={dropdownRef}
       id={id}
     >
       <DropdownItem
