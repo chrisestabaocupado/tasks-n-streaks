@@ -3,15 +3,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useState, useContext } from "react";
 import { ToDoContext } from "../TodoList/ToDoContext";
+import { StreakModeContext } from "../StreakMode/StreakModeContext";
 
-const ToDoInput = ({ isStreakModeOn }) => {
+const ToDoInput = () => {
   const { todosDispatch } = useContext(ToDoContext);
+  const { isStreakModeOn, streaksDispatch } = useContext(StreakModeContext);
+
   const [todo, setTodo] = useState("");
+  const [streak, setStreak] = useState("");
 
   const handleInsert = () => {
     if (!isStreakModeOn) {
       todosDispatch({ type: "insert", todo: todo });
       setTodo("");
+    } else {
+      streaksDispatch({ type: "insert", streak: streak });
+      setStreak("");
     }
   };
 
@@ -24,13 +31,15 @@ const ToDoInput = ({ isStreakModeOn }) => {
         onKeyDown={(e) => {
           e.key === "Enter" && handleInsert();
         }}
-        onChange={(e) => setTodo(e.target.value)}
+        onChange={(e) =>
+          isStreakModeOn ? setStreak(e.target.value) : setTodo(e.target.value)
+        }
         placeholder={
           isStreakModeOn
             ? "Ej: ¿Cerré la puerta del cuarto?"
             : "Ej: Comprar leche condensada."
         }
-        value={todo}
+        value={isStreakModeOn ? streak : todo}
       />
       <button
         onClick={() => {

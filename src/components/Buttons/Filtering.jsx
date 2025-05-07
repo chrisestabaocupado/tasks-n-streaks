@@ -7,20 +7,18 @@ import { SortContext } from "../FiltersAndSorts/SortContext";
 
 const Filtering = () => {
   const { showFilterOptions, setShowFilterOptions } = useContext(FilterContext);
-  const { setShowSortOptions } = useContext(SortContext);
 
   return (
-    <div className="relative z-50 flex flex-col items-start gap-20">
+    <span>
       <RectangleButton
         icon={faFilter}
         text="Filtrar"
         onClick={() => {
-          setShowSortOptions(false);
           setShowFilterOptions((prev) => !prev);
         }}
       ></RectangleButton>
       {showFilterOptions && <DropdownFilter></DropdownFilter>}
-    </div>
+    </span>
   );
 };
 

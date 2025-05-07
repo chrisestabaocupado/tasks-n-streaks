@@ -1,13 +1,22 @@
-import { createContext } from "react";
+import { createContext, useReducer, useEffect, useState } from "react";
+import { streaksReducer, initStreaks } from "../../utils/streaksLocalStorage";
 
 const StreakModeContext = createContext(null);
 
 const StreakModeProvider = ({ children }) => {
-    return (
-        <StreakModeContext.Provider value={{}}>
-            {children}
-        </StreakModeContext.Provider>
-    );
-}
+  const [streaks, streaksDispatch] = useReducer(streaksReducer, initStreaks());
+  const [isStreakModeOn, changeIsStreakModeOn] = useState(false);
 
-export { StreakModeContext, StreakModeProvider }
+  useEffect(() => {
+    localStorage.setItem("streaks", JSON.stringify(streaks.list));
+  }, [streaks.list]);
+  return (
+    <StreakModeContext.Provider
+      value={{ streaks, streaksDispatch, isStreakModeOn, changeIsStreakModeOn }}
+    >
+      {children}
+    </StreakModeContext.Provider>
+  );
+};
+
+export { StreakModeContext, StreakModeProvider };
