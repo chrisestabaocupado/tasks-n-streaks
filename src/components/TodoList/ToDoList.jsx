@@ -1,4 +1,4 @@
-import { GraySpanText } from "../utils/GraySpanText";
+import { GraySpanText } from "../Utils/GraySpanText";
 import { ToDoCard } from "./ToDoCard";
 import { useContext } from "react";
 import { ToDoContext } from "./ToDoContext";
