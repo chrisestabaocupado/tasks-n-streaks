@@ -1,26 +1,70 @@
 /* import styles from './ToDoInput.module.css'; */
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { useState, useContext } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useState, useContext, useEffect } from "react";
 import { ToDoContext } from "../TodoList/ToDoContext";
 import { StreakModeContext } from "../StreakMode/StreakModeContext";
+
+const exampleStreakText = [
+  "Beber 2 litros de agua",
+  "Caminar 10,000 pasos",
+  "Leer 10 páginas de un libro",
+  "Meditar por 5 minutos",
+  "Estudiar inglés por 20 minutos",
+  "Hacer 30 flexiones",
+  "Escribir en el diario",
+  "Despertar antes de las 7am",
+  "Practicar gratitud",
+  "No consumir azúcar hoy",
+];
+
+const exampleToDoText = [
+  "Comprar leche en el supermercado",
+  "Enviar el informe al jefe",
+  "Llamar a mamá",
+  "Pagar la factura del agua",
+  "Organizar el escritorio",
+  "Responder correos pendientes",
+  "Sacar la basura",
+  "Hacer backup del proyecto",
+  "Agendar cita médica",
+  "Planificar la semana",
+];
 
 const ToDoInput = () => {
   const { todosDispatch } = useContext(ToDoContext);
   const { isStreakModeOn, streaksDispatch } = useContext(StreakModeContext);
+
+  const [placeholder, setPlaceHolder] = useState(
+    isStreakModeOn
+      ? exampleStreakText[Math.floor(Math.random() * exampleStreakText.length)]
+      : exampleToDoText[Math.floor(Math.random() * exampleToDoText.length)]
+  );
 
   const [todo, setTodo] = useState("");
   const [streak, setStreak] = useState("");
 
   const handleInsert = () => {
     if (!isStreakModeOn) {
+      if (!todo.trim()) return;
       todosDispatch({ type: "insert", todo: todo });
       setTodo("");
     } else {
+      if (!streak.trim()) return;
       streaksDispatch({ type: "insert", streak: streak });
       setStreak("");
     }
   };
+
+  useEffect(() => {
+    setPlaceHolder(
+      isStreakModeOn
+        ? exampleStreakText[
+            Math.floor(Math.random() * exampleStreakText.length)
+          ]
+        : exampleToDoText[Math.floor(Math.random() * exampleToDoText.length)]
+    );
+  }, [isStreakModeOn]);
 
   return (
     <div className="flex flex-row w-full h-12 rounded-lg ">
@@ -34,11 +78,7 @@ const ToDoInput = () => {
         onChange={(e) =>
           isStreakModeOn ? setStreak(e.target.value) : setTodo(e.target.value)
         }
-        placeholder={
-          isStreakModeOn
-            ? "Ej: ¿Cerré la puerta del cuarto?"
-            : "Ej: Comprar leche condensada."
-        }
+        placeholder={placeholder}
         value={isStreakModeOn ? streak : todo}
       />
       <button
@@ -53,4 +93,4 @@ const ToDoInput = () => {
   );
 };
 
-export {ToDoInput};
+export { ToDoInput };
