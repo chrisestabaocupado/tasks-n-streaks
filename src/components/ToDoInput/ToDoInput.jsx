@@ -26,7 +26,7 @@ const ToDoInput = () => {
     <div className="flex flex-row w-full h-12 rounded-lg ">
       <input
         type="text"
-        className="w-full h-full px-4 focus:outline-none border rounded-tl-lg rounded-bl-lg text-light-text-primary border-light-accent focus:border-light-border dark:focus:border-dark-border dark:border-dark-accent dark:placeholder:text-dark-text-primary dark:text-dark-text-primary transition-all ease-in-out duration-300"
+        className="w-full h-full px-4 focus:outline-none border rounded-tl-lg rounded-bl-lg text-light-text-primary border-light-accent hover:border-light-border focus:border-light-border dark:focus:border-dark-border dark:border-dark-accent dark:placeholder:text-dark-text-primary dark:text-dark-text-primary transition-all ease-in-out duration-300"
         id="todoInput"
         onKeyDown={(e) => {
           e.key === "Enter" && handleInsert();
