@@ -7,13 +7,13 @@ const SwitchToggle = () => {
   const { isStreakModeOn, changeIsStreakModeOn } =
     useContext(StreakModeContext);
 
-  const circleClasses = `transition-all duration-300 duration-300 flex items-center justify-center border border-light-border  dark:border-dark-border dark:bg-dark-primary bg-light-primary w-8 h-full rounded-full z-10 ${
+  const circleClasses = `transition-all duration-300 duration-300 flex items-center justify-center border-2 border-light-accent  dark:border-dark-border dark:bg-dark-primary bg-light-primary w-8 h-full rounded-full z-10 ${
     isStreakModeOn ? "ml-auto" : ""
   }`;
 
   return (
     <label
-      className="relative flex flex-row cursor-pointer w-14 h-9 rounded-full border border-light-border hover:shadow-sm dark:border-dark-accent transition-all duration-300"
+      className="relative flex flex-row cursor-pointer w-14 h-9 rounded-full border-2 border-light-accent hover:border-light-border hover:shadow-sm dark:border-dark-accent transition-all duration-300"
       htmlFor="streakModeToggle"
     >
       <input

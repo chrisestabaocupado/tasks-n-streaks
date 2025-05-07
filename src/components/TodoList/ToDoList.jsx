@@ -23,21 +23,23 @@ const ToDoList = () => {
           title={todo.title}
         />
       ))}
-      <section className="flex flex-col items-center">
-        <div className="w-full flex flex-row gap-2 justify-around">
-          <GraySpanText
-            text={"Tareas Completadas: " + todosDone}
-          ></GraySpanText>
+      {renderedTodos.length != 0 && (
+        <section className="flex flex-col items-center">
+          <div className="w-full flex flex-row gap-2 justify-around">
+            <GraySpanText
+              text={"Tareas Completadas: " + todosDone}
+            ></GraySpanText>
+
+            <GraySpanText
+              text={"Tareas Pendientes: " + todosNotDone}
+            ></GraySpanText>
+          </div>
 
           <GraySpanText
-            text={"Tareas Pendientes: " + todosNotDone}
+            text={"Total de Tareas: " + todos.list.length}
           ></GraySpanText>
-        </div>
-
-        <GraySpanText
-          text={"Total de Tareas: " + todos.list.length}
-        ></GraySpanText>
-      </section>
+        </section>
+      )}
     </section>
   );
 };

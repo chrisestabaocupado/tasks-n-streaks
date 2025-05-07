@@ -32,7 +32,12 @@ const HabitCard = ({ habitData }) => {
             >
               <FontAwesomeIcon icon={faEllipsisVertical} />
             </button>
-            {showDropdown && <DropdownHabit id={habitData.id} setShowDropdown={setShowDropdown}></DropdownHabit>}
+            {showDropdown && (
+              <DropdownHabit
+                id={habitData.id}
+                setShowDropdown={setShowDropdown}
+              ></DropdownHabit>
+            )}
           </span>
           <button
             onClick={() => setShowDetails((prev) => !prev)}
@@ -50,8 +55,14 @@ const HabitCard = ({ habitData }) => {
             <LongestStreak streak={analyzedLogs.longestStreak}></LongestStreak>
           </div>
           <div className="flex flex-col gap-3">
-            <span>Últimos días:</span>
-            <WeekButtons id={habitData.id} week={week} weekData={weekData}></WeekButtons>
+            <span className="text-light-text-primary dark:text-dark-text-primary">
+              Últimos días:
+            </span>
+            <WeekButtons
+              id={habitData.id}
+              week={week}
+              weekData={weekData}
+            ></WeekButtons>
           </div>
         </>
       )}
